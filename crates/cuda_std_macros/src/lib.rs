@@ -27,7 +27,7 @@ pub fn kernel(input: proc_macro::TokenStream, item: proc_macro::TokenStream) -> 
     let mut item = parse_macro_input!(item as ItemFn);
     let no_mangle = parse_quote!(#[no_mangle]);
     item.attrs.push(no_mangle);
-    let internal = parse_quote!(#[cfg_attr(target_arch="nvptx64", nvvm_internal::kernel(#input))]);
+    let internal = parse_quote!(#[cfg_attr(target_arch="nvptx64", nvvm_internal(kernel(#input)))]);
     item.attrs.push(internal);
 
     // used to guarantee some things about how params are passed in the codegen.
