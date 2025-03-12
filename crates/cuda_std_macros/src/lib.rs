@@ -155,7 +155,7 @@ pub fn gpu_only(_attr: proc_macro::TokenStream, item: proc_macro::TokenStream) -
     } = syn::parse_macro_input!(item as syn::ItemFn);
 
     let mut cloned_attrs = attrs.clone();
-    cloned_attrs.retain(|a| a.path().segments[0].ident != "nvvm");
+    cloned_attrs.retain(|a| a.path().segments[0].ident != "nvvm_internal");
 
     let fn_name = sig.ident.clone();
 
