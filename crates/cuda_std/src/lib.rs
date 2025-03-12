@@ -6,6 +6,7 @@
 //! This library will build on non-nvptx targets or targets not using the nvvm backend. However, it will not
 //! be usable, and it will throw linker errors if you attempt to use most of the functions in the library.
 //! However, [`kernel`] automatically cfg-gates the function annotated for `nvptx64`, therefore,
+//! However, [`kernel`] automatically cfg-gates the function annotated for `nvptx64`, therefore,
 //! no "actual" functions from this crate should be used when compiling for a non-nvptx target.
 //!
 //! This crate cannot be used with the llvm ptx backend either, it heavily relies on external functions implicitly
@@ -24,7 +25,7 @@
 #![allow(internal_features)]
 #![cfg_attr(
     target_os = "cuda",
-    feature(alloc_error_handler, asm_experimental_arch, link_llvm_intrinsics)
+    feature(alloc_error_handler, asm_experimental_arch, link_llvm_intrinsics),
 )]
 
 extern crate alloc;
