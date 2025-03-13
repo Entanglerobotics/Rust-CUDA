@@ -688,7 +688,7 @@ bitflags::bitflags! {
     /// an AH programs on the device. May affect the performance of the accel (seems to be larger).
     ///
     /// Note that `PREFER_FAST_TRACE` and `PREFER_FAST_BUILD` are mutually exclusive.
-    #[derive(Default, Clone, Copy, PartialEq, Eq, Debug)]
+    #[derive(Default, Clone, Copy, Debug, PartialEq)]
     pub struct BuildFlags: OptixEnumBaseType {
         const NONE = sys::OptixBuildFlags_OPTIX_BUILD_FLAG_NONE;
         const ALLOW_UPDATE = sys::OptixBuildFlags_OPTIX_BUILD_FLAG_ALLOW_UPDATE;
@@ -714,20 +714,20 @@ impl Default for BuildOperation {
     }
 }
 
-/// Configure how to handle ray times that are outside of the provided motion keys.
-///
-/// By default, the object will appear static (clamped) to the nearest motion
-/// key for rays outside of the range of key times.
-///
-/// * `START_VANISH` - The object will be invisible to rays with a time less
-/// than the first provided motion key
-/// * `END_VANISH` - The object will be invisible to rays with a time less
-/// than the first provided motion key
-#[derive(DeviceCopy, Clone, Copy, PartialEq, Eq, Debug)]
+#[derive(DeviceCopy, Clone, Copy, Debug, PartialEq)]
 pub struct MotionFlags(u16);
 
 bitflags::bitflags! {
-   impl MotionFlags: u16 {
+    /// Configure how to handle ray times that are outside of the provided motion keys.
+    ///
+    /// By default, the object will appear static (clamped) to the nearest motion
+    /// key for rays outside of the range of key times.
+    ///
+    /// * `START_VANISH` - The object will be invisible to rays with a time less
+    /// than the first provided motion key
+    /// * `END_VANISH` - The object will be invisible to rays with a time less
+    /// than the first provided motion key
+    impl MotionFlags: u16 {
         const NONE = sys::OptixMotionFlags_OPTIX_MOTION_FLAG_NONE as u16;
         const START_VANISH = sys::OptixMotionFlags_OPTIX_MOTION_FLAG_START_VANISH as u16;
         const END_VANISH = sys::OptixMotionFlags_OPTIX_MOTION_FLAG_END_VANISH as u16;
@@ -1560,8 +1560,14 @@ const_assert_eq!(
     std::mem::size_of::<sys::OptixInstance>()
 );
 
-#[derive(DeviceCopy, Clone, Copy, PartialEq, Eq, Debug)]
+
+#[derive(DeviceCopy, Clone, Copy, Debug)]
 pub struct InstanceFlags(OptixEnumBaseType);
+
+
+#[derive(DeviceCopy, Clone, Copy, Debug)]
+pub struct InstanceFlags(OptixEnumBaseType);
+
 bitflags::bitflags! {
     impl InstanceFlags: OptixEnumBaseType {
         const NONE = sys::OptixInstanceFlags_OPTIX_INSTANCE_FLAG_NONE;
@@ -1687,7 +1693,7 @@ pub struct InstancePointerArray<'i> {
 }
 
 impl<'i> InstancePointerArray<'i> {
-    pub fn new(instances: &'i DeviceSlice<CUdeviceptr>) -> InstancePointerArray {
+    pub fn new(instances: &'i DeviceSlice<CUdeviceptr>) -> InstancePointerArray<'i> {
         InstancePointerArray { instances }
     }
 }
