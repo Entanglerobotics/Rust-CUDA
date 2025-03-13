@@ -27,7 +27,7 @@ pub fn kernel(input: proc_macro::TokenStream, item: proc_macro::TokenStream) -> 
     let mut item = parse_macro_input!(item as ItemFn);
     let no_mangle = parse_quote!(#[no_mangle]);
     item.attrs.push(no_mangle);
-    let internal = parse_quote!(#[cfg_attr(target_arch="nvptx64", nvvm_internal(kernel(#input)))]);
+    let internal = parse_quote!(#[cfg_attr(target_arch="nvptx64", nvvm_internal::kernel(#input))]);
     item.attrs.push(internal);
 
     // used to guarantee some things about how params are passed in the codegen.
@@ -155,7 +155,11 @@ pub fn gpu_only(_attr: proc_macro::TokenStream, item: proc_macro::TokenStream) -
     } = syn::parse_macro_input!(item as syn::ItemFn);
 
     let mut cloned_attrs = attrs.clone();
+<<<<<<< HEAD
     cloned_attrs.retain(|a| a.path().segments[0].ident != "nvvm_internal");
+=======
+    cloned_attrs.retain(|a| a.path().segments[0].ident != "nvvm");
+>>>>>>> 72ab072 (Fix nvvm_internal attribute usage. `add` example now compiles and runs!)
 
     let fn_name = sig.ident.clone();
 
