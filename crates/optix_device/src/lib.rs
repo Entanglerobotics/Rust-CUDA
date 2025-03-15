@@ -1,4 +1,4 @@
-#[cfg(target_os = "cuda")]
+#![cfg_attr(target_os = "cuda", feature(asm_experimental_arch))]
 use core::arch::asm;
 
 extern crate alloc;
@@ -16,7 +16,6 @@ pub mod util;
 use cuda_std::*;
 pub use glam;
 use glam::UVec3;
-
 pub use misc::*;
 
 extern "C" {

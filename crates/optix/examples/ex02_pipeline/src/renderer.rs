@@ -41,7 +41,7 @@ impl Renderer {
         println!("tex align: {}\nsrf align: {}", tex_align, srf_align);
 
         let cuda_context =
-            CuContext::create_and_push(ContextFlags::SCHED_AUTO | ContextFlags::MAP_HOST, device)?;
+            CuContext::new(device)?;
         let stream = Stream::new(StreamFlags::DEFAULT, None)?;
 
         let mut ctx = DeviceContext::new(&cuda_context, false)?;
