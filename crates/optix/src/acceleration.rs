@@ -1134,13 +1134,13 @@ impl From<CurveType> for sys::OptixPrimitiveType {
 #[repr(u32)]
 #[derive(Copy, Clone, PartialEq)]
 pub enum VertexFormat {
-    None = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_NONE,
-    Float3 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_FLOAT3,
-    Float2 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_FLOAT2,
-    Half3 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_HALF3,
-    Half2 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_HALF2,
-    SNorm16 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_SNORM16_3,
-    SNorm32 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_SNORM16_2,
+    None = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_NONE as u32,
+    Float3 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_FLOAT3 as u32,
+    Float2 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_FLOAT2 as u32,
+    Half3 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_HALF3 as u32,
+    Half2 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_HALF2 as u32,
+    SNorm16 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_SNORM16_3 as u32,
+    SNorm32 = sys::OptixVertexFormat_OPTIX_VERTEX_FORMAT_SNORM16_2 as u32,
 }
 
 /// Specifies the type of index data
